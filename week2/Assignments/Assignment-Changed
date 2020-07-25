@@ -39,7 +39,7 @@ public class ReAssignment2 {
 		driver.findElementByXPath("(//div[@class = 'frameSectionExtra'])[2]/a").click();
 		//Create Lead
 		driver.findElementByXPath("(//input[@name = 'duplicatingPartyId']/following-sibling::div//tr)[25]//input").click();
-		//Company name 
+		//First name 
 		String companyName = driver.findElementByXPath("//span[@id = 'viewLead_firstName_sp']").getText();
 		System.out.println(companyName);
 		
