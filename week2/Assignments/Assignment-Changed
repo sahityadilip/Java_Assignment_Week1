@@ -1,0 +1,57 @@
+package week2.Assignments;
+
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ReAssignment2 {
+
+	public static void main(String[] args) throws InterruptedException {
+		System.setProperty("webdriver.chrome.driver","//Users//mac//Downloads//chromedriver4");
+		ChromeDriver driver = new ChromeDriver();
+		driver.get("http://leaftaps.com/opentaps/control/main");
+		//Attribute xpath for username and collection xpath for password
+		driver.findElementByXPath("//input[@id = 'username']").sendKeys("demosalesmanager");
+		driver.findElementByXPath("(//input[@class='inputLogin'])[2]").sendKeys("crmsfa");
+		
+		//Attribute xpath
+		driver.findElementByXPath("//input[@class='decorativeSubmit']").click();
+		//text based xpath
+		//driver.findElementByXPath("//a[text() = '                CRM/SFA              ']").click();
+		driver.findElementByXPath("//a[@style = 'color: black;']").click();
+		driver.findElementByXPath("//a[text()='Leads']").click();
+		driver.findElementByXPath("//ul[@class = 'shortcuts']/li[3]/a").click();
+		driver.findElementByXPath("//span[text() = 'Phone']").click();
+		Thread.sleep(500);
+		driver.findElementByXPath("((//label[text() = 'Phone Number:'])[4]/following-sibling::div//input)[2]").sendKeys("91");
+		driver.findElementByXPath("((//label[text() = 'Phone Number:'])[4]/following-sibling::div//input)[3]").sendKeys("897686868686");
+		driver.findElementByXPath("//button[text() = 'Find Leads']").click();
+		Thread.sleep(500);
+		
+		//Click record
+		
+		String tableID = driver.findElementByXPath("((//span[text() = 'Lead List']/following::table)[2]//a)[3]").getText();
+		System.out.println(tableID);
+		
+		driver.findElementByXPath("((//span[text() = 'Lead List']/following::table)[2]//a)[1]").click();
+		//(//label[@class = ' x-form-item-label'])[4]/following::div//td[2]//input[1]
+
+		//Click Duplicate Lead
+		Thread.sleep(500);
+		driver.findElementByXPath("(//div[@class = 'frameSectionExtra'])[2]/a").click();
+		//Create Lead
+		driver.findElementByXPath("(//input[@name = 'duplicatingPartyId']/following-sibling::div//tr)[25]//input").click();
+		//Company name 
+		String companyName = driver.findElementByXPath("//span[@id = 'viewLead_firstName_sp']").getText();
+		System.out.println(companyName);
+		
+		
+		if(companyName.contains(tableID))
+		{
+			
+			System.out.println("matches");
+		}
+		
+		driver.close();
+		
+	}
+
+}
