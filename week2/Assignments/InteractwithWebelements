@@ -1,0 +1,230 @@
+package week2.Assignments;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WindowType;
+import org.openqa.selenium.chrome.ChromeDriver;
+import java.util.Scanner;
+
+public class Assignment1 {
+
+	public static void main(String[] args) throws InterruptedException {
+		System.setProperty("webdriver.chrome.driver", "//Users//mac//Downloads//chromedriver4");
+		ChromeDriver driver = new ChromeDriver();
+		driver.get("http://leafground.com/pages/Edit.html");
+		driver.findElementByXPath("(//div[@class='example'])[1]//input").sendKeys("TEST");
+		Thread.sleep(500);
+		driver.findElementByXPath("(//div[@class='example'])[2]//input").sendKeys("TEST");
+		Thread.sleep(500);
+		System.out.println(driver.findElementByXPath("(//div[@class='example'])[3]//input").getAttribute("value"));
+		Thread.sleep(500);
+		driver.findElementByXPath("(//div[@class='example'])[4]//input").clear();
+		
+		WebElement element = driver.findElementByXPath("(//div[@class='example'])[4]//input");
+		
+		if(element.isDisplayed() == true)
+		{
+			System.out.println("true");
+			
+		}
+		//driver.close();
+		
+		String homepage = "http://leafground.com/pages/Link.html";
+		//link
+		driver.get("http://leafground.com/pages/Link.html");
+		
+		//WebElement e = driver.findElementByXPath("(//div[@class='example'])[1]//a");
+		
+		//e.click();
+		//driver.get(link);
+		
+		//Link2
+		
+		System.out.println(driver.findElementByXPath("//a[contains(text(),'Find where ')] ").getAttribute("href"));
+		
+		//Link3
+		
+		String broken = driver.findElementByXPath("//a[contains(text(),'Verify am')] ").getAttribute("href");
+		
+		driver.switchTo().newWindow(WindowType.TAB);
+		
+		driver.get(broken);
+		
+		String S =  driver.getTitle();
+		if (S.contains(homepage))
+		{
+			System.out.println("valid link");
+			
+		}
+		else
+		{
+			System.out.println("Broken link");
+			
+		}
+		
+		//Go to Home Page
+		
+		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+		driver.switchTo().window(tabs.get(0));
+		
+		String link4 = driver.findElementByXPath("(//a[contains(text(),'Go to Home Page')])[2]").getAttribute("href");
+		driver.switchTo().newWindow(WindowType.TAB);
+		driver.get(link4);
+		
+		driver.switchTo().window(tabs.get(0));
+		
+		
+		//How many links are available
+		
+		List<WebElement> links = driver.findElementsByXPath("//a");
+		int totallinks = links.size();
+		
+		System.out.println(totallinks);
+		for ( WebElement link:links)
+		{
+			System.out.println(link);
+			
+		}
+		
+		driver.switchTo().newWindow(WindowType.TAB);
+		
+		driver.get("http://leafground.com/pages/radio.html");
+		
+		Thread.sleep(500);
+		driver.findElementByXPath("//input[@id = 'yes']").click();
+		Thread.sleep(500);
+		
+		List<WebElement> names = driver.findElementsByXPath("//input[@name = 'news']");
+		
+		for(WebElement name:names)
+		{
+			
+			System.out.println(name.getText());
+			if(name.isSelected() == true)
+			{
+				
+				System.out.println(name.getText() + "Checked value is selected");
+			}
+			
+			
+			
+		}
+		
+		
+		
+		
+		
+		List<WebElement> radios = driver.findElementsByXPath("//input[@name = 'age']");
+		
+		for(WebElement radio:radios)
+		{
+			if (radio.isSelected()== true)
+			{
+				System.out.println(radio.getText() + "is selected");
+				
+			}
+			
+		}
+		
+		
+		
+		//Check boxes to select Languages
+		
+		driver.switchTo().newWindow(WindowType.TAB);
+		driver.get("http://leafground.com/pages/checkbox.html");
+		
+		//Selenium checkbox is selected
+		
+
+		if(driver.findElementByXPath("(//label[text() = 'Confirm Selenium is checked']/following::div)[1]/input").isSelected() == true)
+		{
+			
+			System.out.println("Selenium Checkbox is selected");
+		}
+		
+		
+		
+		
+		
+		
+		
+		//Multiple Checkbox
+		List<WebElement> multiChecks = driver.findElementsByXPath("(//label[text()='DeSelect only checked']/following::div)/input");
+		
+		for(WebElement multicheck:multiChecks)
+		{
+			
+			
+			if(multicheck.isSelected() == true)
+			{
+				multicheck.click();
+				break;
+			}
+			
+			
+			
+		}
+		
+		
+List<WebElement> multiCheckBoxs = driver.findElementsByXPath("(//label[text()='Select all below checkboxes ']/following::div)/input");
+		
+		for(WebElement multiCheckBox:multiCheckBoxs)
+		{
+			
+			
+			multiCheckBox.click();
+			
+			
+			
+		}
+			Thread.sleep(500);
+			
+		
+		System.out.println("Enter the input/n 1.Java/n2.VB");
+		Scanner input = new Scanner(System.in);
+		int myLanguage = input.nextInt();
+		
+		Thread.sleep(500);
+		
+		switch (myLanguage)
+		{
+		case 1:
+			driver.findElementByXPath("(//label[text()='Select the languages that you know?']/following::div)[1]/input").click();
+			break;
+			
+		case 2:
+			
+			driver.findElementByXPath("(//label[text()='Select the languages that you know?']/following::div)[2]/input").click();
+			break;
+			
+			
+        case 3:
+			
+			driver.findElementByXPath("(//label[text()='Select the languages that you know?']/following::div)[3]/input").click();
+			break;
+			
+        case 4:
+			
+			driver.findElementByXPath("(//label[text()='Select the languages that you know?']/following::div)[4]/input").click();
+			break;
+			
+        case 5:
+			
+			driver.findElementByXPath("(//label[text()='Select the languages that you know?']/following::div)[5]/input").click();
+			break;
+		
+		
+		
+		}
+		
+		
+		
+		
+
+		
+	}
+
+}
