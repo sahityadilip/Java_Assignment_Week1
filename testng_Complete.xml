@@ -5,8 +5,11 @@
 <parameter name="password" value="crmsfa"></parameter>
   <test thread-count="5" name="Test">
     <classes>
-     
+       <class name="practice1.TestNG.CreateLeadP2"/>
+     <class name="practice1.TestNG.EditLeadP2"/>
+     <class name="practice1.TestNG.DeleteLeadP2"/>
       <class name="practice1.TestNG.MergeLeadP2"/>
+      
       
     </classes>
   </test> <!-- Test -->
